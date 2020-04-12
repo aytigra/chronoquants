@@ -74,3 +74,13 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+# preview swoosh emails in the local (in-memory) mailbox
+config :chronoquants, Chronoquants.Mailer,
+  adapter: Swoosh.Adapters.Local
+
+# to run the preview server together as part of your app
+#config :swoosh, serve_mailbox: false
+
+# to change the preview server port (4000 by default)
+#config :swoosh, serve_mailbox: true, preview_port: 4001

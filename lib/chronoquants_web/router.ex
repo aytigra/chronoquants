@@ -23,4 +23,12 @@ defmodule ChronoquantsWeb.Router do
   # scope "/api", ChronoquantsWeb do
   #   pipe_through :api
   # end
+
+  if Mix.env == :dev do
+    scope "/dev" do
+      pipe_through [:browser]
+
+      forward "/mailbox", Plug.Swoosh.MailboxPreview, [base_path: "/dev/mailbox"]
+    end
+  end
 end

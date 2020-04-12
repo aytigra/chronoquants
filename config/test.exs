@@ -16,3 +16,7 @@ config :chronoquants, ChronoquantsWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+# test swoosh emails
+config :chronoquants, Chronoquants.Mailer,
+  adapter: Swoosh.Adapters.Test
