@@ -35,6 +35,15 @@ config :chronoquants, :pow,
   mailer_backend: ChronoquantsWeb.Pow.Mailer,
   web_mailer_module: ChronoquantsWeb
 
+config :chronoquants, :pow_assent,
+  providers: [
+    github: [
+      client_id: "1ec4907d88517b303f15",
+      client_secret: "77185e010d63855efc76acf4286eec63ede3acf1",
+      strategy: Assent.Strategy.Github
+    ]
+  ]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

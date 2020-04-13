@@ -28,5 +28,7 @@
   </div>
 <% end %>
 
+<%= for link <- PowAssent.Phoenix.ViewHelpers.provider_links(@conn),
+  do: content_tag(:span, link) %>
 
 <span><%= link "Sign in", to: Routes.pow_session_path(@conn, :new) %></span>

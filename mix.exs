@@ -45,7 +45,8 @@ defmodule Chronoquants.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:swoosh, "~> 0.25"},
       {:phoenix_swoosh, "~> 0.2"},
-      {:pow, "~> 1.0.19"}
+      {:pow, "~> 1.0.19"},
+      {:pow_assent, "~> 0.4.6"}
     ]
   end
 

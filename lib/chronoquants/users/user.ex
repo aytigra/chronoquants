@@ -3,6 +3,7 @@ defmodule Chronoquants.Users.User do
   use Pow.Ecto.Schema
   use Pow.Extension.Ecto.Schema,
     extensions: [PowResetPassword, PowEmailConfirmation, PowPersistentSession]
+  use PowAssent.Ecto.Schema
 
   schema "users" do
     field :name, :string
@@ -18,5 +19,11 @@ defmodule Chronoquants.Users.User do
     |> pow_extension_changeset(attrs)
     |> Ecto.Changeset.cast(attrs, [:name])
     |> Ecto.Changeset.validate_required([:name])
+  end
+
+  def user_identity_changeset(user_or_changeset, user_identity, attrs, user_id_attrs) do
+    user_or_changeset
+    |> Ecto.Changeset.cast(attrs, [:name])
+    |> pow_assent_user_identity_changeset(user_identity, attrs, user_id_attrs)
   end
 end
