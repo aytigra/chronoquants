@@ -1,4 +1,4 @@
-<section class="phx-hero">
+<section class="box">
   <h1><%= gettext "Welcome to %{name}!", name: "Chronoquants" %></h1>
   <p>A place where you can play with history.</p>
 </section>

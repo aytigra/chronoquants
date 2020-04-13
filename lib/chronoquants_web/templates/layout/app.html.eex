@@ -10,27 +10,85 @@
   </head>
   <body>
     <header>
-      <section class="container">
-        <nav role="navigation">
-          <ul>
-            <li>
-              <%= if Pow.Plug.current_user(@conn) do %>
-                <span><%= link "Sign out", to: Routes.pow_session_path(@conn, :delete), method: :delete %></span>
-              <% else %>
-                <span><%= link "Register", to: Routes.pow_registration_path(@conn, :new) %></span>
-                <span><%= link "Sign in", to: Routes.pow_session_path(@conn, :new) %></span>
-              <% end %>
-            </li>
-          </ul>
-        </nav>
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            <img src="<%= Routes.static_path(@conn, "/images/logo.png") %>" height="28">
+          </a>
 
-      </section>
+          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+
+        <div class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item">
+              Home
+            </a>
+
+            <a class="navbar-item">
+              Documentation
+            </a>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                More
+              </a>
+
+              <div class="navbar-dropdown">
+                <a class="navbar-item">
+                  About
+                </a>
+                <a class="navbar-item">
+                  Jobs
+                </a>
+                <a class="navbar-item">
+                  Contact
+                </a>
+                <hr class="navbar-divider">
+                <a class="navbar-item">
+                  Report an issue
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                <%= if Pow.Plug.current_user(@conn) do %>
+                  <%= link to: Routes.pow_session_path(@conn, :delete), method: :delete, class: "button is-light" do %>
+                    <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+                    <span>Log out</span>
+                  <% end %>
+                <% else %>
+                  <%= link to: Routes.pow_registration_path(@conn, :new), class: "button is-primary" do %>
+                    <span><strong>Register</strong></span>
+                  <% end %>
+                  <%= link to: Routes.pow_session_path(@conn, :new), class: "button is-light" do %>
+                    <span>Log in</span>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
     </header>
-    <main role="main" class="container">
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+    <main role="main" class="section">
+      <%= unless is_nil(get_flash(@conn, :info)) do %>
+        <div class="notification is-info" role="alert"><%= get_flash(@conn, :info) %></div>
+      <% end %>
+      <%= unless is_nil(get_flash(@conn, :error)) do %>
+        <div class="notification is-danger" role="alert"><%= get_flash(@conn, :error) %></div>
+      <% end %>
+
       <%= render @view_module, @view_template, assigns %>
     </main>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    <script src="https://kit.fontawesome.com/02381d4cd6.js" crossorigin="anonymous"></script>
   </body>
 </html>
