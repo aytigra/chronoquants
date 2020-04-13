@@ -26,9 +26,14 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-config :chronoquants, Chronoquants.Mailer,
-  adapter: Swoosh.Adapters.Sendgrid,
-  api_key: "SG.x.x"
+config :chronoquants, :pow,
+  user: Chronoquants.Users.User,
+  repo: Chronoquants.Repo,
+  web_module: ChronoquantsWeb,
+  extensions: [PowResetPassword, PowEmailConfirmation, PowPersistentSession],
+  controller_callbacks: Pow.Extension.Phoenix.ControllerCallbacks,
+  mailer_backend: ChronoquantsWeb.Pow.Mailer,
+  web_mailer_module: ChronoquantsWeb
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

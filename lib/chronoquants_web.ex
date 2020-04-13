@@ -45,6 +45,16 @@ defmodule ChronoquantsWeb do
     end
   end
 
+  def mailer_view do
+    quote do
+      use Phoenix.View,
+        root: "lib/chronoquants_web/templates",
+        namespace: ChronoquantsWeb
+
+      use Phoenix.HTML
+    end
+  end
+
   def router do
     quote do
       use Phoenix.Router

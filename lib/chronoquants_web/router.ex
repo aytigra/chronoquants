@@ -1,5 +1,8 @@
 defmodule ChronoquantsWeb.Router do
   use ChronoquantsWeb, :router
+  use Pow.Phoenix.Router
+  use Pow.Extension.Phoenix.Router,
+    extensions: [PowResetPassword, PowEmailConfirmation, PowPersistentSession]
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,8 +16,20 @@ defmodule ChronoquantsWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", ChronoquantsWeb do
+  pipeline :authenticated do
+    plug Pow.Plug.RequireAuthenticated,
+      error_handler: Pow.Phoenix.PlugErrorHandler
+  end
+
+  scope "/" do
     pipe_through :browser
+
+    pow_routes()
+    pow_extension_routes()
+  end
+
+  scope "/", ChronoquantsWeb do
+    pipe_through [:browser, :authenticated]
 
     get "/", PageController, :index
   end

@@ -79,6 +79,9 @@ config :phoenix, :plug_init_mode, :runtime
 config :chronoquants, Chronoquants.Mailer,
   adapter: Swoosh.Adapters.Local
 
+config :chronoquants, ChronoquantsWeb.Pow.Mailer,
+  adapter: Swoosh.Adapters.Local
+
 # to run the preview server together as part of your app
 #config :swoosh, serve_mailbox: false
 

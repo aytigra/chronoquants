@@ -56,3 +56,11 @@ import_config "prod.secret.exs"
 
 # No need for Swoosh memory storage process for local adapter
 config :swoosh, local: false
+
+config :chronoquants, Chronoquants.Mailer,
+  adapter: Swoosh.Adapters.Sendgrid,
+  api_key: "SG.x.x"
+
+config :chronoquants, ChronoquantsWeb.Pow.Mailer,
+  adapter: Swoosh.Adapters.Sendgrid,
+  api_key: "SG.x.x"

@@ -20,3 +20,6 @@ config :logger, level: :warn
 # test swoosh emails
 config :chronoquants, Chronoquants.Mailer,
   adapter: Swoosh.Adapters.Test
+
+config :chronoquants, ChronoquantsWeb.Pow.Mailer,
+  adapter: Swoosh.Adapters.Test
