@@ -1,0 +1,55 @@
+<nav class="navbar is-transparent is-fixed-top" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/">
+      <img src="<%= Routes.static_path(@conn, "/images/logo.png") %>" height="28">
+    </a>
+
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="topnav-menu">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="topnav-menu" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item">
+        Documentation
+      </a>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <%= if Pow.Plug.current_user(@conn) do %>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              <%= Pow.Plug.current_user(@conn).name %>
+            </a>
+
+            <div class="navbar-dropdown">
+              <a class="navbar-item">
+                Profile
+              </a>
+
+              <hr class="navbar-divider">
+
+              <%= link to: Routes.pow_session_path(@conn, :delete), method: :delete, class: "navbar-item is-block" do %>
+                <span>Log out</span>
+                <span class="icon is-pulled-right"><i class="fas fa-sign-out-alt"></i></span>
+              <% end %>
+            </div>
+          </div>
+        <% else %>
+          <div class="buttons are-slim">
+            <%= link to: Routes.pow_registration_path(@conn, :new), class: "button is-primary" do %>
+              <span><strong>Register</strong></span>
+            <% end %>
+            <%= link to: Routes.pow_session_path(@conn, :new), class: "button is-light" do %>
+              <span>Log in</span>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>

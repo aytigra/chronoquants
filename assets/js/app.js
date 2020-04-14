@@ -15,3 +15,33 @@ import "phoenix_html"
 //
 // Local files can be imported directly using relative paths, for example:
 // import socket from "./socket"
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  // notification delete button
+  (document.querySelectorAll('.notification .delete') || []).forEach(el => {
+    el.addEventListener('click', event => {
+      event.target.parentNode.parentNode.removeChild(event.target.parentNode)
+    });
+  });
+
+  // Add a click event on each of "navbar-burger" elements
+  (document.querySelectorAll('.navbar-burger') || []).forEach( el => {
+    el.addEventListener('click', event => {
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      event.target.classList.toggle('is-active');
+      // Get the target from the "data-target" attribute
+      document.getElementById('topnav-menu').classList.toggle('is-active');
+    });
+  });
+
+  // Add a click event on each of navbar dropdowns
+  (document.querySelectorAll('.navbar-item.has-dropdown .navbar-link') || []).forEach( el => {
+    el.addEventListener('click', event => {
+      event.target.parentNode.classList.toggle('is-active');
+    });
+  });
+});

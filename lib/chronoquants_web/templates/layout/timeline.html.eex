@@ -12,11 +12,7 @@
     <%= render("_topnav.html", conn: @conn) %>
     <%= render("_alerts.html", conn: @conn) %>
 
-    <section class="section">
-      <div class="container has-text-centered">
-        <%= render @view_module, @view_template, assigns %>
-      </div>
-    </div>
+    <%= render @view_module, @view_template, assigns %>
 
     <%= render("_footer.html", conn: @conn) %>
 

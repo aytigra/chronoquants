@@ -1,0 +1,15 @@
+.button.is-slim {
+  padding-top: calc(0.25em - 1px);
+  padding-bottom: calc(0.25em - 1px);
+  height: 2em;
+}
+
+.buttons.are-slim .button {
+  @extend .button.is-slim
+}
+
+@media screen and (min-width: 1024px) {
+  .navbar-dropdown a.navbar-item {
+    padding-right: 1rem;
+  }
+}

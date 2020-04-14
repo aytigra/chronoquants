@@ -1,0 +1,14 @@
+<div class="container">
+  <%= unless is_nil(get_flash(@conn, :info)) do %>
+    <div class="notification is-info is-light" role="alert">
+      <button class="delete"></button>
+      <%= get_flash(@conn, :info) %>
+    </div>
+  <% end %>
+  <%= unless is_nil(get_flash(@conn, :error)) do %>
+    <div class="notification is-danger is-light" role="alert">
+      <button class="delete"></button>
+      <%= get_flash(@conn, :error) %>
+    </div>
+  <% end %>
+</div>

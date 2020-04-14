@@ -9,6 +9,6 @@ defmodule ChronoquantsWeb.PageController do
     # |> UserEmail.welcome()
     # |> Mailer.deliver
 
-    render(conn, "index.html")
+    render(conn, "index.html", layout: {ChronoquantsWeb.LayoutView, "timeline.html"})
   end
 end
