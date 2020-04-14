@@ -8,8 +8,26 @@
   @extend .button.is-slim
 }
 
-@media screen and (min-width: 1024px) {
+.navbar-item .icon {
+  margin-right: $gap/2;
+}
+
+@media screen and (min-width: $desktop ) {
   .navbar-dropdown a.navbar-item {
-    padding-right: 1rem;
+    padding-right: $size-normal;
+  }
+}
+
+@media screen and (max-width: $desktop - 1) {
+  .has-dropdown>.navbar-link {
+    display: none;
+  }
+
+  .navbar-dropdown {
+    font-size: $size-normal;
+  }
+
+  .navbar-dropdown>.navbar-item {
+    padding-left: $size-small;
   }
 }

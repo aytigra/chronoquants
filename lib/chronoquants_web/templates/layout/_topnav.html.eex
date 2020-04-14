@@ -14,32 +14,33 @@
   <div id="topnav-menu" class="navbar-menu">
     <div class="navbar-start">
       <a class="navbar-item">
-        Documentation
+        Something
       </a>
     </div>
 
     <div class="navbar-end">
-      <div class="navbar-item">
-        <%= if Pow.Plug.current_user(@conn) do %>
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">
-              <%= Pow.Plug.current_user(@conn).name %>
+      <%= if Pow.Plug.current_user(@conn) do %>
+        <div class="navbar-item has-dropdown">
+          <div class="navbar-link">
+            <span class="icon"><i class="fas fa-user-circle"></i></span>
+          </div>
+
+          <div class="navbar-dropdown is-right">
+            <a class="navbar-item">
+              <span class="icon is-small"><i class="fas fa-cog"></i></span>
+              <strong><%= Pow.Plug.current_user(@conn).name %></strong>
             </a>
 
-            <div class="navbar-dropdown">
-              <a class="navbar-item">
-                Profile
-              </a>
+            <hr class="navbar-divider">
 
-              <hr class="navbar-divider">
-
-              <%= link to: Routes.pow_session_path(@conn, :delete), method: :delete, class: "navbar-item is-block" do %>
-                <span>Log out</span>
-                <span class="icon is-pulled-right"><i class="fas fa-sign-out-alt"></i></span>
-              <% end %>
-            </div>
+            <%= link to: Routes.pow_session_path(@conn, :delete), method: :delete, class: "navbar-item is-block" do %>
+              <span class="icon is-small"><i class="fas fa-sign-out-alt"></i></span>
+              <span>Log out</span>
+            <% end %>
           </div>
-        <% else %>
+        </div>
+      <% else %>
+        <div class="navbar-item">
           <div class="buttons are-slim">
             <%= link to: Routes.pow_registration_path(@conn, :new), class: "button is-primary" do %>
               <span><strong>Register</strong></span>
@@ -48,8 +49,8 @@
               <span>Log in</span>
             <% end %>
           </div>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </nav>
