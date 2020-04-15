@@ -1,18 +1,36 @@
-<h1>Reset password</h1>
+<div class="column is-4 is-offset-4">
+  <h3 class="title has-text-black-bis">Reset password</h3>
+  <p class="subtitle has-text-grey">We will send you email with instructions</p>
 
-<%= form_for @changeset, @action, [as: :user], fn f -> %>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
-    </div>
-  <% end %>
+  <div class="box has-text-left">
+    <%= form_for @changeset, @action, [as: :user], fn f -> %>
+      <%= if @changeset.action do %>
+        <div class="notification is-danger">
+          Please check the errors below.
+        </div>
+      <% end %>
 
-  <%= label f, :email %>
-  <%= text_input f, :email %>
-  <%= error_tag f, :email %>
+      <div class="field">
+        <p class="control has-icons-left has-icons-right">
+          <%= text_input f, :email, class: "input", placeholder: "Email", type: "email" %>
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+        </p>
+        <%= error_tag f, :email %>
+      </div>
 
-  <div>
-    <%= submit "Submit" %>
+      <div class="field">
+        <p class="control">
+          <%= submit "Send", class: "button is-primary is-fullwidth" %>
+        </p>
+      </div>
+    <% end %>
   </div>
-<% end %>
 
+  <p>
+    <%= link "Log in", to: Routes.pow_session_path(@conn, :new) %>
+    <%= " . " %>
+    <%= link "Register", to: Routes.pow_registration_path(@conn, :new) %>
+  </p>
+</div>

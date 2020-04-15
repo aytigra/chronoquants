@@ -1,34 +1,67 @@
-<h1>Register</h1>
+<div class="column is-4 is-offset-4">
+  <h3 class="title has-text-black-bis">Register</h3>
+  <p class="subtitle has-text-grey">And create your own timelines!</p>
 
-<%= form_for @changeset, @action, [as: :user], fn f -> %>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
-    </div>
-  <% end %>
+  <div class="box has-text-left">
+    <%= form_for @changeset, @action, [as: :user], fn f -> %>
+      <%= if @changeset.action do %>
+        <div class="notification is-danger">
+          Please check the errors below.
+        </div>
+      <% end %>
 
-  <%= label f, :name %>
-  <%= text_input f, :name %>
-  <%= error_tag f, :name %>
+      <div class="field">
+        <p class="control has-icons-left has-icons-right">
+          <%= text_input f, :name, class: "input", placeholder: "Your name or nickname" %>
+          <span class="icon is-small is-left">
+            <i class="fas fa-user"></i>
+          </span>
+        </p>
+        <%= error_tag f, :name %>
+      </div>
 
-  <%= label f, Pow.Ecto.Schema.user_id_field(@changeset) %>
-  <%= text_input f, Pow.Ecto.Schema.user_id_field(@changeset) %>
-  <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
+      <div class="field">
+        <p class="control has-icons-left has-icons-right">
+          <%= text_input f, Pow.Ecto.Schema.user_id_field(@changeset), class: "input", placeholder: "Email", type: "email" %>
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+        </p>
+        <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
+      </div>
 
-  <%= label f, :password %>
-  <%= password_input f, :password %>
-  <%= error_tag f, :password %>
+      <div class="field">
+        <p class="control has-icons-left">
+          <%= password_input f, :password, class: "input", placeholder: "Password" %>
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </p>
+        <%= error_tag f, :password %>
+      </div>
 
-  <%= label f, :password_confirmation %>
-  <%= password_input f, :password_confirmation %>
-  <%= error_tag f, :password_confirmation %>
+      <div class="field">
+        <p class="control has-icons-left">
+          <%= password_input f, :password_confirmation, class: "input", placeholder: "Repeat Password" %>
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </p>
+        <%= error_tag f, :password_confirmation %>
+      </div>
 
-  <div>
-    <%= submit "Register" %>
+
+      <div class="field">
+        <p class="control">
+          <%= submit "Register", class: "button is-primary is-fullwidth" %>
+        </p>
+      </div>
+    <% end %>
+
+    <hr>
+
+    <%= render(ChronoquantsWeb.SharedView, "pow_accent_providers.html", conn: @conn) %>
   </div>
-<% end %>
 
-<%= for link <- PowAssent.Phoenix.ViewHelpers.provider_links(@conn),
-  do: content_tag(:span, link) %>
-
-<span><%= link "Sign in", to: Routes.pow_session_path(@conn, :new) %></span>
+  <p><%= link "Log in", to: Routes.pow_session_path(@conn, :new) %></p>
+</div>

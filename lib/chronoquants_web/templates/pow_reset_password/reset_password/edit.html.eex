@@ -1,24 +1,41 @@
-<h1>Reset password</h1>
+<div class="column is-4 is-offset-4">
+  <h3 class="title has-text-black-bis">Reset password</h3>
+  <p class="subtitle has-text-grey">Choose and save your new password</p>
 
-<%= form_for @changeset, @action, [as: :user], fn f -> %>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
-    </div>
-  <% end %>
+  <div class="box has-text-left">
+    <%= form_for @changeset, @action, [as: :user], fn f -> %>
+      <%= if @changeset.action do %>
+        <div class="notification is-danger">
+          Please check the errors below.
+        </div>
+      <% end %>
 
-  <%= label f, :password %>
-  <%= password_input f, :password %>
-  <%= error_tag f, :password %>
 
-  <%= label f, :password_confirmation %>
-  <%= password_input f, :password_confirmation %>
-  <%= error_tag f, :password_confirmation %>
+      <div class="field">
+        <p class="control has-icons-left">
+          <%= password_input f, :password, class: "input", placeholder: "Password" %>
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </p>
+        <%= error_tag f, :password %>
+      </div>
 
-  <div>
-    <%= submit "Submit" %>
+      <div class="field">
+        <p class="control has-icons-left">
+          <%= password_input f, :password_confirmation, class: "input", placeholder: "Repeat Password" %>
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </p>
+        <%= error_tag f, :password_confirmation %>
+      </div>
+
+      <div class="field">
+        <p class="control">
+          <%= submit "Save", class: "button is-primary is-fullwidth" %>
+        </p>
+      </div>
+    <% end %>
   </div>
-<% end %>
-
-
-<span><%= link "Sign in", to: Routes.pow_session_path(@conn, :new) %></span>
+</div>

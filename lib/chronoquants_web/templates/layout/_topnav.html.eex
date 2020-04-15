@@ -26,10 +26,10 @@
           </div>
 
           <div class="navbar-dropdown is-right">
-            <a class="navbar-item">
+            <%= link to: Routes.pow_registration_path(@conn, :edit), class: "navbar-item is-block" do %>
               <span class="icon is-small"><i class="fas fa-cog"></i></span>
               <strong><%= Pow.Plug.current_user(@conn).name %></strong>
-            </a>
+            <% end %>
 
             <hr class="navbar-divider">
 

@@ -1,0 +1,9 @@
+<nav class="level is-mobile">
+  <%= for {provider, path, msg, _action} <- pow_accent_provider_links(@conn) do %>
+    <%= link to: path, class: "level-item has-text-centered", "aria-label": msg, title: msg do %>
+      <span class="icon is-big">
+        <i class="fab fa-<%= provider %> fa-2x" aria-hidden="true"></i>
+      </span>
+    <% end %>
+  <% end %>
+</nav>

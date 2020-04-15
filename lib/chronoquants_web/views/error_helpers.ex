@@ -11,7 +11,7 @@ defmodule ChronoquantsWeb.ErrorHelpers do
   def error_tag(form, field) do
     Enum.map(Keyword.get_values(form.errors, field), fn error ->
       content_tag(:span, translate_error(error),
-        class: "help-block",
+        class: "help is-danger",
         data: [phx_error_for: input_id(form, field)]
       )
     end)
