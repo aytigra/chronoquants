@@ -2,66 +2,61 @@ defmodule Chronoquants.SequencesTest do
   use Chronoquants.DataCase
 
   alias Chronoquants.Sequences
+  import Chronoquants.Factory
 
   describe "sequences" do
     alias Chronoquants.Sequences.Sequence
 
-    @valid_attrs %{name: "some name", public: true, summary: "some summary"}
-    @update_attrs %{name: "some updated name", public: false, summary: "some updated summary"}
-    @invalid_attrs %{name: nil, public: nil, summary: nil}
+    @valid_attrs params_for(:sequence)
+    @update_attrs %{name: "some updated name",}
+    @invalid_attrs %{name: nil}
 
-    def sequence_fixture(attrs \\ %{}) do
-      {:ok, sequence} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Sequences.create_sequence()
+    test "list_sequences/1 returns all sequences" do
+      sequence = insert(:sequence)
+      sequence_id = sequence.id
 
-      sequence
-    end
-
-    test "list_sequences/0 returns all sequences" do
-      sequence = sequence_fixture()
-      assert Sequences.list_sequences() == [sequence]
+      assert [%Sequence{id: ^sequence_id}] = Sequences.list_sequences(sequence.user)
     end
 
     test "get_sequence!/1 returns the sequence with given id" do
-      sequence = sequence_fixture()
-      assert Sequences.get_sequence!(sequence.id) == sequence
+      sequence = insert(:sequence)
+      sequence_id = sequence.id
+
+      assert %Sequence{id: ^sequence_id} = Sequences.get_sequence!(sequence.id)
     end
 
     test "create_sequence/1 with valid data creates a sequence" do
-      assert {:ok, %Sequence{} = sequence} = Sequences.create_sequence(@valid_attrs)
-      assert sequence.name == "some name"
-      assert sequence.public == true
-      assert sequence.summary == "some summary"
+      user = insert(:user)
+      assert {:ok, %Sequence{} = sequence} = Sequences.create_sequence(user, @valid_attrs)
+      assert sequence.name == @valid_attrs.name
     end
 
     test "create_sequence/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Sequences.create_sequence(@invalid_attrs)
+      user = insert(:user)
+      assert {:error, %Ecto.Changeset{}} = Sequences.create_sequence(user, @invalid_attrs)
     end
 
     test "update_sequence/2 with valid data updates the sequence" do
-      sequence = sequence_fixture()
+      sequence = insert(:sequence)
       assert {:ok, %Sequence{} = sequence} = Sequences.update_sequence(sequence, @update_attrs)
-      assert sequence.name == "some updated name"
-      assert sequence.public == false
-      assert sequence.summary == "some updated summary"
+      assert sequence.name == @update_attrs.name
     end
 
     test "update_sequence/2 with invalid data returns error changeset" do
-      sequence = sequence_fixture()
+      sequence = insert(:sequence)
+      not_updated_name = sequence.name
       assert {:error, %Ecto.Changeset{}} = Sequences.update_sequence(sequence, @invalid_attrs)
-      assert sequence == Sequences.get_sequence!(sequence.id)
+      assert %Sequence{name: ^not_updated_name} = Sequences.get_sequence!(sequence.id)
     end
 
     test "delete_sequence/1 deletes the sequence" do
-      sequence = sequence_fixture()
+      sequence = insert(:sequence)
       assert {:ok, %Sequence{}} = Sequences.delete_sequence(sequence)
       assert_raise Ecto.NoResultsError, fn -> Sequences.get_sequence!(sequence.id) end
     end
 
     test "change_sequence/1 returns a sequence changeset" do
-      sequence = sequence_fixture()
+      sequence = insert(:sequence)
       assert %Ecto.Changeset{} = Sequences.change_sequence(sequence)
     end
   end

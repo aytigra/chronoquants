@@ -41,7 +41,7 @@ defmodule ChronoquantsWeb do
 
       import ChronoquantsWeb.ErrorHelpers
       import ChronoquantsWeb.SharedHelpers
-      import ChronoquantsWeb.Pow.AccentViewHelpers
+      import ChronoquantsWeb.PowAssent.ViewHelpers
       import ChronoquantsWeb.Gettext
       alias ChronoquantsWeb.Router.Helpers, as: Routes
     end

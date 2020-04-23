@@ -1,10 +1,10 @@
-defmodule ChronoquantsWeb.Pow.AccentViewHelpers do
+defmodule ChronoquantsWeb.PowAssent.ViewHelpers do
   @moduledoc """
   View helpers to render authorization links.
   """
   alias PowAssent.Plug
 
-  alias Phoenix.{HTML, HTML.Link}
+  alias Phoenix.HTML
   alias PowAssent.Phoenix.AuthorizationController
 
   @doc """

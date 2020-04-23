@@ -20,7 +20,7 @@ defmodule Chronoquants.MixProject do
   def application do
     [
       mod: {Chronoquants.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :ex_machina]
     ]
   end
 
@@ -46,7 +46,8 @@ defmodule Chronoquants.MixProject do
       {:swoosh, "~> 0.25"},
       {:phoenix_swoosh, "~> 0.2"},
       {:pow, "~> 1.0.19"},
-      {:pow_assent, "~> 0.4.6"}
+      {:pow_assent, "~> 0.4.6"},
+      {:ex_machina, "~> 2.4"}
     ]
   end
 
