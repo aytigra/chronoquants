@@ -47,6 +47,7 @@ defmodule ChronoquantsWeb.Router do
     pipe_through [:browser, :authenticated]
 
     get "/", PageController, :index
+    resources "/sequences", SequenceController
   end
 
   # Other scopes may use custom stacks.

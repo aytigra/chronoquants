@@ -1,0 +1,5 @@
+<h1>Edit Sequence</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.sequence_path(@conn, :update, @sequence)) %>
+
+<span><%= link "Back", to: Routes.sequence_path(@conn, :index) %></span>

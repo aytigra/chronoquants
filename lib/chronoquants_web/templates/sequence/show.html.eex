@@ -1,0 +1,23 @@
+<h1>Show Sequence</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @sequence.name %>
+  </li>
+
+  <li>
+    <strong>Public:</strong>
+    <%= @sequence.public %>
+  </li>
+
+  <li>
+    <strong>Summary:</strong>
+    <%= @sequence.summary %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.sequence_path(@conn, :edit, @sequence) %></span>
+<span><%= link "Back", to: Routes.sequence_path(@conn, :index) %></span>

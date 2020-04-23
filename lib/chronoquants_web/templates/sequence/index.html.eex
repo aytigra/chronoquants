@@ -1,0 +1,30 @@
+<h1>Listing Sequences</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Public</th>
+      <th>Summary</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for sequence <- @sequences do %>
+    <tr>
+      <td><%= sequence.name %></td>
+      <td><%= sequence.public %></td>
+      <td><%= sequence.summary %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.sequence_path(@conn, :show, sequence) %></span>
+        <span><%= link "Edit", to: Routes.sequence_path(@conn, :edit, sequence) %></span>
+        <span><%= link "Delete", to: Routes.sequence_path(@conn, :delete, sequence), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Sequence", to: Routes.sequence_path(@conn, :new) %></span>

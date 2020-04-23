@@ -7,6 +7,7 @@ defmodule Chronoquants.Users.User do
 
   schema "users" do
     field :name, :string
+    has_many :sequences, Chronoquants.Sequences.Sequence
 
     pow_user_fields()
 
